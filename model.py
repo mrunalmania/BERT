@@ -93,13 +93,3 @@ class BERTLM(torch.nn.Module):
     def forward(self, x, segment_label):
         x = self.bert(x, segment_label)
         return self.next_sentence(x), self.mask_lm(x)
-
-
-
-
-
-
-
-
-
-
