@@ -40,7 +40,7 @@ class BERT(torch.nn.Module):
 
         # multi-layer transformer block
         self.encoded_blocks = torch.nn.ModuleList(
-            [EncoderLayer(d_model, heads, d_model*4, dropout=0.1) for _ in range(n_layers)]
+            [EncoderLayer(d_model, heads, d_model*4, dropout) for _ in range(n_layers)]
         )
 
     

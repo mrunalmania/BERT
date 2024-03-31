@@ -72,7 +72,7 @@ class FeedForward(torch.nn.Module):
         super(FeedForward, self).__init__()
 
         self.fc1 = torch.nn.Linear(d_model, middle_dim)
-        self.fc2 = torch.nn.L1Loss(middle_dim, d_model)
+        self.fc2 = torch.nn.Linear(middle_dim, d_model)
         self.dropout = torch.nn.Dropout(p=dropout)
         self.activation = torch.nn.GELU()
     
@@ -84,11 +84,11 @@ class FeedForward(torch.nn.Module):
 
 # Now we need to create the encoder layer
 class EncoderLayer(torch.nn.Module):
-    def __init__(self, d_model=768, heads = 12, feed_forward_hidden = 768*4, dropout=0.1) -> None:
+    def __init__(self, d_model=768, heads = 12, feed_forward_hidden = 768*4, dropout=0.1):
         super(EncoderLayer, self).__init__()
         
         self.layernorm = torch.nn.LayerNorm(d_model)
-        self.self_multihead = MultiHeadAttention(heads=heads, d_model=d_model, dropout=dropout)
+        self.self_multihead = MultiHeadAttention(heads, d_model=d_model)
         self.feed_forward = FeedForward(d_model, middle_dim=feed_forward_hidden)
         self.dropout = torch.nn.Dropout(p=dropout)
     
